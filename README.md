@@ -19,4 +19,4 @@ Many ideas, maths, models and methods are taken, improved or modified from the f
 • Modeling Derivatives in C++, J. London
 
 The code is created in PyCharm and can be tested on Jupyter Notebook with minor changes: 
-(i.e. you simply add the line %matplotlib inline) 
+(e.g. you simply add the line %matplotlib inline) 
