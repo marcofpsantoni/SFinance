@@ -5,17 +5,17 @@ import pandas as pd
 """
 Let's assume that the past correlation is a good indicator
 for the future correlation of 2 stocks + 1 index + 1 commodity
-Let's find the best portfolio form historical data
+Let's find out the best portfolio form historical data
 """
 
-filename = '../source/tr_eikon_eod_data.csv'
+filename = '../data/tr_eikon_eod_data.csv'
 raw = pd.read_csv(filename).dropna()
 symbols = ['AAPL.O', 'MSFT.O', 'SPY', 'GLD']
 r = 0.01
 noa = len(symbols)
 data = raw[symbols]
 rets = np.log(data / data.shift(1))
-#rets.hist(bins=40, figsize=(10, 8))
+#rets.hist(bins=40, figsize=(8, 8))
 
 
 def port_ret(weights):
@@ -66,7 +66,7 @@ for tret in trets:
     tvols.append(res['fun'])
 tvols = np.array(tvols)
 m = (port_ret(opts['x']) / port_vol(opts['x']))
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.scatter(pvols, prets, c=prets / pvols, marker='.', alpha=0.8, cmap='coolwarm')
 plt.plot(tvols, trets, 'b', lw=3.0)
 plt.plot(port_vol(opts['x']), port_ret(opts['x']),'y*', markersize=15.0)
@@ -112,7 +112,7 @@ def equations(p, rf=0.01):
 opt = sco.fsolve(equations, [0.01, 0.5, 0.15])
 print(np.round(equations(opt), 6))
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.scatter(pvols, prets, c=(prets - 0.01) / pvols, marker='.', cmap='coolwarm')
 plt.plot(evols, erets, 'b', lw=4.0)
 cx = np.linspace(0.0, 0.3)

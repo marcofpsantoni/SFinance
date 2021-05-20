@@ -28,14 +28,14 @@ def run_simulation(f):
 
 c_1 = run_simulation(f)
 print(c_1.round(2))
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.plot(c_1, 'b', lw=0.5)
 plt.plot(c_1.mean(axis=1), 'r', lw=2.5)
 c_2 = run_simulation(0.05)
 c_3 = run_simulation(0.25)
 c_4 = run_simulation(0.5)
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.plot(c_1.mean(axis=1), 'r', label='$f^*=0.1$')
 plt.plot(c_2.mean(axis=1), 'b', label='$f=0.05$')
 plt.plot(c_3.mean(axis=1), 'y', label='$f=0.25$')

@@ -7,10 +7,10 @@ K = 105.  # strike price
 T = 1.0  # time-to-maturity
 r = 0.05  # riskless short rate
 sigma = 0.2  # volatility
-I = 100000  # number of simulations
+n_p = 100000  # Number of paths  # number of simulations
 
 # Valuation Algorithm
-z = np.random.standard_normal(I)  # pseudo-random numbers
+z = np.random.standard_normal(n_p)  # pseudo-random numbers
 # stock/index values at maturity (static vectorized expression)
 ST = S0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * math.sqrt(T) * z)
 hT = np.maximum(ST - K, 0)  # payoff at maturity

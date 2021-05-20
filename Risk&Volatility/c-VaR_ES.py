@@ -32,32 +32,32 @@ S0 = 100
 r = 0.05
 sigma = 0.25
 T = 30 / 365.
-I = 100000
+n_p = 100000  # Number of paths
 
 # MC simulation for GBM
-ST = S0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * np.sqrt(T) * npr.standard_normal(I))
+ST = S0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * np.sqrt(T) * npr.standard_normal(n_p))
 R_gbm = np.sort(ST - S0)
-plt.figure(figsize=(10, 6))
-plt.hist(R_gbm, bins=50)
+plt.figure(figsize=(8, 8))
+plt.hist(R_gbm, bins=50, weights=np.ones(len(R_gbm)) / len(R_gbm))
 plt.xlabel('Absolute return for Geometric Brownian Motion')
-plt.ylabel('Frequency (Number of Events on 100000 paths)')
+plt.ylabel('Frequency')
 
 # Lets's add some jumps a la Merton
 
-M = 60
+nti = 100  # number of time intervals
 lamb = 0.5  # poissonian lambda for the jump
 mu = -0.6  # poissonian mu of the jump (time - independent)
 delta = 0.25  # jump volatility
 
-dt = 30. / 365 / M
+dt = 30. / 365 / nti
 rj = lamb * (math.exp(mu + 0.5 * delta ** 2) - 1)
 
-S = np.zeros((M + 1, I))
+S = np.zeros((nti + 1, n_p))
 S[0] = S0
-sn1 = npr.standard_normal((M + 1, I))
-sn2 = npr.standard_normal((M + 1, I))
-poi = npr.poisson(lamb * dt, (M + 1, I))
-for t in range(1, M + 1, 1):
+sn1 = npr.standard_normal((nti + 1, n_p))
+sn2 = npr.standard_normal((nti + 1, n_p))
+poi = npr.poisson(lamb * dt, (nti + 1, n_p))
+for t in range(1, nti + 1):
     S[t] = S[t - 1] * (np.exp((r - rj - 0.5 * sigma ** 2) * dt
                     + sigma * math.sqrt(dt) * sn1[t])
                     + (np.exp(mu + delta * sn2[t]) - 1)
@@ -65,8 +65,8 @@ for t in range(1, M + 1, 1):
     S[t] = np.maximum(S[t], 0)
 
 R_jd = np.sort(S[-1] - S0)
-plt.figure(figsize=(10, 6))
-plt.hist(R_jd, bins=50)
+plt.figure(figsize=(8, 8))
+plt.hist(R_jd, bins=50, weights=np.ones(len(R_jd)) / len(R_jd))
 plt.xlabel('absolute return GRW + JD')
 plt.ylabel('frequency')
 
@@ -99,7 +99,7 @@ es_jd = np.array([np.mean([R_jd[i] for i in range(len(R_jd)) if R_jd[i] <= jd_va
 es_jd_std = np.array([np.std([R_jd[i] for i in range(len(R_jd)) if R_jd[i] <= jd_var[j]]) for j in range(len(percs))])
 
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.plot(percs, gbm_var, 'b', lw=1.5, label='VaR GBM')
 plt.plot(percs, jd_var, 'r', lw=1.5, label='VaR JD')
 plt.plot(percs, es_grw, 'y', lw=1.5, label='ES GBM')
@@ -111,7 +111,7 @@ plt.ylim(ymax=0.0)
 
 # ES with JD +- sigma
 
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 8))
 plt.plot(percs, es_jd, 'b', lw=1.5, label='ES JD')
 plt.plot(percs, es_jd+es_jd_std, 'r', lw=1.5, label='+$\sigma$')
 plt.plot(percs, es_jd-es_jd_std, 'r', lw=1.5, label='-$\sigma$')

@@ -9,14 +9,14 @@ import scipy.stats as scs
 Let's merge 2 data set of S&P 500
 '''
 
-filename = '../source/tr_eikon_eod_data.csv'
+filename = '../data/tr_eikon_eod_data.csv'
 raw = pd.read_csv(filename, index_col=0, parse_dates=True).dropna()
 symbol = '.SPX'
 data = pd.DataFrame(raw[symbol])
 data['returns'] = np.log(data / data.shift(1))
 data.dropna(inplace=True)
 
-filename2 = '../source/SPY20052021HistoricalData.csv'
+filename2 = '../data/SPY20052021HistoricalData.csv'
 raw2 = pd.read_csv(filename2, index_col=0, parse_dates=True).dropna()
 symbol2 = 'Price'
 data2 = pd.DataFrame(raw2[symbol2])
@@ -28,7 +28,7 @@ d2 = data2.iloc[::-1]
 d2 = d2.loc['2018-07-02':]
 data = data.append(d2, sort=True)
 
-#data['returns'].cumsum().apply(np.exp).plot(legend=True, figsize=(10, 6))
+#data['returns'].cumsum().apply(np.exp).plot(legend=True, figsize=(8, 8))
 
 mu = data.returns.mean() * 252  # Calculates the annualized return.
 sigma = data.returns.std() * 252 ** 0.5  # Calculates the annualized volatility.
@@ -55,7 +55,7 @@ def kelly_strategy(f):
 kelly_strategy(f * 0.5)  # Values for 1/2 KC
 kelly_strategy(f * 0.66)  # Values for 2/3 KC
 kelly_strategy(f)  # Optimal KC
-ax = data['returns'].cumsum().apply(np.exp).plot(legend=True, figsize=(10, 6))
+ax = data['returns'].cumsum().apply(np.exp).plot(legend=True, figsize=(8, 8))
 plt.title('Varied KC Values on SPY, Starting from $1')
 plt.xlabel('Years')
 plt.ylabel('$ Return')

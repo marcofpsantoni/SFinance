@@ -140,7 +140,7 @@ print(sig)
 print(bsm_call_value(100, 105, 1.5, 0.01, sig/100))
 zd = f(xd, yd)
 
-fig = plt.figure(figsize=(10, 6))
+fig = plt.figure(figsize=(8, 8))
 ax = fig.gca(projection='3d')
 surf = ax.plot_surface(X, Y, df, rstride=2, cstride=2,
                        cmap='coolwarm', linewidth=0.5,

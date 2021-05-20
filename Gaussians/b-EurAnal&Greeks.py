@@ -280,12 +280,12 @@ tec = np.array(tec)
 rec = np.array(rec)
 
 
-from pylab import mpl, plt
+from pylab import plt
 fig, ((ax1, ax2), (ax3, ax4), (ax5, ax6)) = plt.subplots(3, 2, sharex=True, figsize=(15, 10))
 ax1.plot(k_list, ec, 'b', label='call ')
 ax1.plot(k_list, ep, 'r', label='put ')
 ax1.set_ylabel('Eur Opt value')
-fig.legend(loc=0)
+fig.legend(loc=1)
 ax2.plot(k_list, dec, 'b', label='Delta')
 ax2.plot(k_list, dep, 'r', label='Delta')
 ax2.set_ylabel('Delta')
