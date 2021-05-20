@@ -1,7 +1,7 @@
 # SFinance
 Standalone code from PyCharm
 
-SFinance is a class of simple Standalone algorithms for Finance in Python.
+SFinance is a class of simple Standalone algorithms for Finance in Python 3.6 & 3.7.
 Many ideas, maths, models and methods are taken, improved or modified from the following books:
 
 • Options, Futures, and Other Derivatives, J. C. Hull
