@@ -41,7 +41,7 @@ plt.figure(figsize=(8, 8))
 plt.hist(R_gbm, bins=50, weights=np.ones(len(R_gbm)) / len(R_gbm))
 plt.xlabel('Absolute return for Geometric Brownian Motion')
 plt.ylabel('Frequency')
-
+plt.savefig('Fig/c-1-GRWRet.png')
 # Lets's add some jumps a la Merton
 
 nti = 100  # number of time intervals
@@ -69,7 +69,7 @@ plt.figure(figsize=(8, 8))
 plt.hist(R_jd, bins=50, weights=np.ones(len(R_jd)) / len(R_jd))
 plt.xlabel('absolute return GRW + JD')
 plt.ylabel('frequency')
-
+plt.savefig('Fig/c-2-GRW+JDRet.png')
 
 
 #A Table with some ES and VaR values
@@ -108,7 +108,7 @@ plt.legend(loc=4)
 plt.xlabel('100 - confidence level [%]')
 plt.ylabel('value-at-risk')
 plt.ylim(ymax=0.0)
-
+plt.savefig('Fig/c-3-VaRES.png')
 # ES with JD +- sigma
 
 plt.figure(figsize=(8, 8))
@@ -120,5 +120,7 @@ plt.legend(loc=4)
 plt.xlabel('100 - confidence level [%]')
 plt.ylabel('ES $\pm\sigma$ in a BDM+JD model')
 plt.ylim(ymax=0.0)
+
+plt.savefig('Fig/c-4-ES+-sigma.png')
 
 plt.show()

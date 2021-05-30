@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from pylab import plt
 
 # Parameter Values
 S0 = 100.  # initial index level
@@ -16,5 +17,12 @@ ST = S0 * np.exp((r - 0.5 * sigma ** 2) * T + sigma * math.sqrt(T) * z)
 hT = np.maximum(ST - K, 0)  # payoff at maturity
 C0 = math.exp(-r * T) * np.mean(hT)  # Monte Carlo estimator
 
+C00 = math.exp(-r * T)*hT
+plt.hist(C00, bins=50, weights=np.ones(len(C00)) / len(C00))
+plt.xlabel('Eur Call MC value')
+plt.ylabel('frequency')
+
+plt.savefig('Fig/a-EurC0MC.png')
 # Result Output
 print('Value of the European call option %5.3f.' % C0)
+plt.show()
