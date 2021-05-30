@@ -10,7 +10,7 @@ data.info()
 data['rets'] = np.log(data / data.shift(1))
 data['vola'] = data['rets'].rolling(252).std() * np.sqrt(252)
 data[['.SPX', 'rets', 'vola']].plot(subplots=True, figsize=(8, 8))
-
+plt.savefig('Fig/a-1-SPXRetVol.png')
 """
 Let's see the "leverage effect" between the S&P500 and the fear factor (VIX)
 VIX, is an index of the implied volatility of 30-day options on the S&P 500 calculated
@@ -19,10 +19,9 @@ We compute the correlation.
 """
 raw = pd.read_csv('../data/tr_eikon_eod_data.csv', index_col=0, parse_dates=True)
 data = raw[['.SPX', '.VIX']].dropna()
-
 # let's take a few yars to better observe the leverage effect
 data.loc[:'2013-12-31'].plot(secondary_y='.VIX', figsize=(8, 8))
-
+plt.savefig('Fig/a-2-SPXVIX.png')
 
 # The correlation between the returns and the scatter plot
 rets = np.log(data / data.shift(1))
@@ -30,11 +29,13 @@ rets.dropna(inplace=True)
 reg = np.polyfit(rets['.SPX'], rets['.VIX'], deg=1)
 ax = rets.plot(kind='scatter', x='.SPX', y='.VIX', figsize=(8, 8))
 ax.plot(rets['.SPX'], np.polyval(reg, rets['.SPX']), 'r', lw=2)
+plt.savefig('Fig/a-3-CorrSPXVIX.png')
 
 # The tot average correlation and the rolling 1 year corr
 plt.figure(figsize=(8, 8))
 ax = rets['.SPX'].rolling(window=252).corr(rets['.VIX']).plot()
 ax.axhline(rets.corr().iloc[0, 1], c='r')
+plt.savefig('Fig/a-4-CorrSPXVIX1yearCorr.png')
 
 plt.show()
 

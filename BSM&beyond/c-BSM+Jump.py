@@ -40,10 +40,12 @@ plt.figure(figsize=(8, 8))
 plt.hist(S[-1], bins=50, weights=np.ones(len(S[-1])) / len(S[-1]))
 plt.xlabel('index value')
 plt.ylabel('frequency')
+plt.savefig('Fig/c-bimodal')
 
 plt.figure(figsize=(8, 8))
 plt.plot(S[:, :10], lw=1.5)
 plt.xlabel('time')
 plt.ylabel('index value')
+plt.savefig('Fig/c-paths-jumps')
 
 plt.show()

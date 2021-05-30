@@ -152,5 +152,6 @@ ax.set_ylabel('Time in years')
 ax.set_zlabel('Imp Vol')
 ax.legend()
 fig.colorbar(surf3, shrink=0.5, aspect=5)
+plt.savefig('Fig/b-ImpVolInterpolation.png')
 
 plt.show()

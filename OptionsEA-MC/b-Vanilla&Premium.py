@@ -79,7 +79,7 @@ def gbm_mcs_amer(K, option='call'):
     # LSM algorithm
     V = np.copy(h)
     for t in range(nti - 1, 0, -1):
-        reg = np.polyfit(S[t], V[t + 1] * df, 7)
+        reg = np.polyfit(S[t], V[t + 1] * df, 8)
         C = np.polyval(reg, S[t])
         V[t] = np.where(C > h[t], V[t + 1] * df, h[t])
     # MCS estimator
@@ -164,18 +164,22 @@ def gbm_mcs_dyna(K, option='call'):
 print(gbm_mcs_amer(110., 'call'))
 print(gbm_mcs_amer(110., 'put'))
 print(bsm_call_value(110., 'put'), gbm_mcs_dyna(110, 'put'))
+
+"""
+Let's see the premium for an american index option. 
+Without dividends there is no early exercise premium for call.
+c=C
+"""
+
 euro_res = []
 amer_res = []
-
-k_list = np.arange(80., 120.1, 5.)
-
+k_list = np.arange(85., 125.1, 5.)
 for K in k_list:
     euro_res.append(bsm_call_value(K, 'put'))
     amer_res.append(gbm_mcs_amer(K, 'put'))
-
 euro_res = np.array(euro_res)
 amer_res = np.array(amer_res)
-fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(8, 8))
+fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(12, 8))
 ax1.plot(k_list, euro_res, 'b', label='European put')
 ax1.plot(k_list, amer_res, 'ro', label='American put')
 ax1.set_ylabel('put option value')
@@ -184,6 +188,6 @@ wi = 1.0
 ax2.bar(k_list - wi / 2, (amer_res - euro_res) / euro_res * 100, wi)
 ax2.set_xlabel('strike')
 ax2.set_ylabel('early exercise premium in %')
-ax2.set_xlim(left=75, right=125)
-
+ax2.set_xlim(left=80, right=130)
+plt.savefig('Fig/b-PremiumAE.png')
 plt.show()

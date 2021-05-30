@@ -86,7 +86,7 @@ a = mogliesoglia(100)
 #Vediamo i valori di soglia in base al numero di appuntamenti rimasti
 plt.figure(figsize=(8, 8))
 plt.plot(a)
-plt.xlabel('appuntamenti rimanenti')
-plt.ylabel('soglia')
-
+plt.xlabel('Remaining App')
+plt.ylabel('Tradhold')
+plt.savefig('Fig/a-1-App')
 plt.show()

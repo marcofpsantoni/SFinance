@@ -60,6 +60,7 @@ plt.title('Varied KC Values on SPY, Starting from $1')
 plt.xlabel('Years')
 plt.ylabel('$ Return')
 data[equs].plot(ax=ax, legend=True)
+plt.savefig('Fig/b-1-KellySP500')
 
 """
 The optimal KC gives big jumps. The strategy is not smooth.
@@ -95,6 +96,7 @@ sm.qqplot(data['returns'], line='s')
 plt.title('SPY')
 plt.xlabel('theoretical quantiles')
 plt.ylabel('sample quantiles')
+plt.savefig('Fig/b-2-SP500GaussDeviation')
 
 plt.show()
 
