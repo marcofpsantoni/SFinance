@@ -1,5 +1,5 @@
 '''
-Merton's Jump with constant volatility
+Merton's Jump with constant volatility -
 Evolution of a stock including a jump diffusion model
 you can model a bimodal distributions (left fat tails).
 '''
@@ -11,12 +11,12 @@ from pylab import plt
 
 #Numerical parametrization
 
-S0 = 100. # stock initial value
-r = 0.05 # constant (short riskless) interest rate
-sigma = 0.2 # constant volatility
-lamb = 0.75 # poissonian lambda for the jump
-mu = -0.6 # poissonian mu of the jump (time - independent)
-delta = 0.25 # jump volatility
+S0 = 100.  # stock initial value
+r = 0.05  # constant (short riskless) interest rate
+sigma = 0.2  # constant volatility
+lamb = 0.75  # poissonian lambda for the jump (jump intensity)
+mu = -0.6  # poissonian mu of the jump (mean jump - time-independent)
+delta = 0.25  # jump volatility
 rj = lamb * (np.exp(mu + 0.5 * delta ** 2) - 1)  # drift correction
 
 T = 1.0
@@ -38,14 +38,14 @@ for t in range(1, nti + 1):
 
 plt.figure(figsize=(8, 8))
 plt.hist(S[-1], bins=50, weights=np.ones(len(S[-1])) / len(S[-1]))
-plt.xlabel('index value')
+plt.xlabel('index/stock value')
 plt.ylabel('frequency')
 plt.savefig('Fig/c-bimodal')
 
 plt.figure(figsize=(8, 8))
 plt.plot(S[:, :10], lw=1.5)
-plt.xlabel('time')
-plt.ylabel('index value')
+plt.xlabel('time intervals (max = 1 year)')
+plt.ylabel('index/stock value')
 plt.savefig('Fig/c-paths-jumps')
 
 plt.show()

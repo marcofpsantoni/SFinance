@@ -48,7 +48,7 @@ S = np.zeros_like(ran_num[0])
 S[0] = S0
 for t in range(1, nti + 1):
     ran = np.dot(cho_mat, ran_num[:, t, :])
-    S[t] = S[t - 1] * np.exp((r - 0.5 * v[t]**2) * dt + np.sqrt(v[t]) * ran[0] * np.sqrt(dt))
+    S[t] = S[t - 1] * np.exp((r - 0.5 * v[t]) * dt + np.sqrt(v[t]) * ran[0] * np.sqrt(dt))
 
 stat = scs.describe(S[-1])
 #print("mean ", stat[2], np.mean(S[-1]))
@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True, figsize=(8, 8))
 ax1.plot(S[:, :10], lw=1.5)
 ax1.set_ylabel('index level')
 ax2.plot(v[:, :10], lw=1.5)
-ax2.set_xlabel('time')
+ax2.set_xlabel('time intervals (max = 1 year)')
 ax2.set_ylabel('volatility')
 plt.savefig('Fig/b-paths')
 plt.show()
