@@ -7,22 +7,15 @@ import scipy.stats as scs
 '''
 Let's see VaR and ES with a simple simulation.
 
-Value-at-risk (VaR) is a number denoted in currency units 
-(e.g., USD, EUR, JPY) indicating a loss (of a portfolio, a single position, etc.) that is not exceeded 
-with some confidence level (probability) over a given period of time. Consider a stock position, 
+Value-at-risk  is a number denoted in currency units 
+(e.g., USD, EUR, JPY) indicating a loss (of a portfolio, a single position, etc.) 
+that is not exceeded with some confidence level over a given period of time. 
+
+Consider a stock position, 
 worth 1 million USD today, that has a VaR of 50,000 USD at a confidence level of 99% over a 
 time period of 30 days (one month). 
 The metric says that with a probability of 99%, the loss to be expected over a period of 
-30 days will not exceed 50,000 USD. However, it does not say anything about the size of the loss once 
-a loss beyond 50,000 USD occurs — i.e., if the maximum loss is 100,000 or 500,000 USD what the probability 
-of such a specific “higher than VaR loss” is. All it says is that there is a 1% probability that a loss of 
-a minimum of 50,000 USD or higher will occur. 
-
-Assume the Black-Scholes-Merton setup and consider the 
-following parameterization and simulation of index levels at a future date upper T = 30 /365 
-(a period of 30 days). The estimation of VaR figures requires the simulated absolute profits and 
-losses relative to the value of the position today in a sorted manner, i.e., 
-from the severest loss to the largest profit.
+30 days will not exceed 50,000 USD. 
 
 ES is the average of the left tail.
 
