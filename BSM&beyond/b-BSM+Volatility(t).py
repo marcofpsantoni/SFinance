@@ -4,9 +4,8 @@ from pylab import plt
 import scipy.stats as scs
 
 '''
-The BSM model with the Euler scheme discretisation is 
-a dynamic view of the stock evolution.
-The short rate and the volatility can vary in time. 
+BSM model with the Euler scheme discretisation.
+Short rate and the volatility can vary in time. 
 Here we apply the square root diffusion to the volatility 
 (Heston stochastic volatility model). 
 With the Cholesky matrix we model
