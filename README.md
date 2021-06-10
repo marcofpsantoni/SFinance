@@ -14,8 +14,6 @@ Many ideas, maths, models and methods are taken, improved or modified from the f
 
 • Problems and Solutions in Mathematical Finance, E. Chin, D. Nel and S. Ólafsson
 
-• Python for Finance, Y. J. Hilpisch
-
 • Modeling Derivatives in C++, J. London
 
 The code is created in PyCharm and can be tested on Jupyter Notebook with minor changes: 
